@@ -1,0 +1,40 @@
+# Gates, run 2026-11-24 00:08, node v26.0.0
+
+$ npm ci
+npm warn deprecated eslint@9.39.5: This version is no longer supported. Please see https://eslint.org/version-support for other options.
+
+added 328 packages, and audited 329 packages in 2s
+
+133 packages are looking for funding
+  run `npm fund` for details
+
+found 0 vulnerabilities
+exit 0
+
+$ npm run lint
+
+> personal-portfolio@0.0.0 lint
+> eslint .
+exit 0
+
+$ npm test
+ Test Files  20 passed (20)
+      Tests  44 passed (44)
+   Start at  00:08:56
+   Duration  2.28s (environment 68%, setup 10%, transform 9%, import 6%, tests 6%)
+
+Environment  jsdom was created 20 times · 8.38s total, 68% of tracked time
+             create it once per worker with pool: 'vmThreads' (keeps per-file isolation) or isolate: false (shares it across files)
+             learn more: https://vitest.dev/guide/improving-performance#test-environments
+exit 0
+
+$ npm run build
+dist/assets/History-Shorts-Planner-Cr7zJp_w.jpg           101.92 kB
+dist/assets/Claude-Session-D0tVDpta.jpg                   117.23 kB
+dist/assets/flight-booking-Bilgl0kH.jpg                   124.70 kB
+dist/assets/fairobuy-BNSkLNuq.jpg                         130.15 kB
+dist/assets/index-BPBrB7tZ.css                             25.09 kB │ gzip:  5.16 kB
+dist/assets/index-DjWBy3Eb.js                             257.31 kB │ gzip: 81.15 kB
+
+✓ built in 385ms
+exit 0

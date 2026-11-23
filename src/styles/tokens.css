@@ -1,0 +1,11 @@
+:root{
+
+  --bg:hsl(0 0% 100%);--text:hsl(222 22% 5%);--primary:hsl(240 95% 62%);--secondary:hsl(333 100% 45%);
+  --g50:hsl(225 40% 96%);--g100:hsl(225 25% 92%);--g200:hsl(225 16% 86%);--g500:hsl(225 7% 60%);--g600:hsl(225 15% 50%);--g700:hsl(225 12% 40%);--g900:hsl(225 25% 20%);
+  --tint:hsl(240 95% 62% / .09);--code:hsl(213 80% 95%);
+  --font:Inter,ui-sans-serif,system-ui,-apple-system,"Segoe UI",Roboto,sans-serif;
+  --mono:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;
+  color-scheme:light}
+/* dark values are derived from Josh's 225deg gray scale, not copied from his dark theme */
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--bg:hsl(225 25% 8%);--text:hsl(225 40% 96%);--primary:hsl(240 100% 75%);--secondary:hsl(333 95% 65%);--g50:hsl(225 20% 12%);--g100:hsl(225 15% 16%);--g200:hsl(225 12% 22%);--g500:hsl(225 8% 55%);--g600:hsl(225 10% 65%);--g700:hsl(225 12% 75%);--g900:hsl(225 25% 88%);--tint:hsl(240 100% 75% / .12);--code:hsl(225 20% 14%);color-scheme:dark}}
+:root[data-theme="dark"]{--bg:hsl(225 25% 8%);--text:hsl(225 40% 96%);--primary:hsl(240 100% 75%);--secondary:hsl(333 95% 65%);--g50:hsl(225 20% 12%);--g100:hsl(225 15% 16%);--g200:hsl(225 12% 22%);--g500:hsl(225 8% 55%);--g600:hsl(225 10% 65%);--g700:hsl(225 12% 75%);--g900:hsl(225 25% 88%);--tint:hsl(240 100% 75% / .12);--code:hsl(225 20% 14%);color-scheme:dark}

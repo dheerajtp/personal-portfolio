@@ -1,0 +1,11 @@
+.chips{display:flex;flex-wrap:wrap;gap:6px;margin-top:12px}
+.chip{font:500 12px var(--font);color:var(--primary);background:var(--tint);border-radius:99px;padding:3px 12px}
+.links{display:flex;gap:14px;margin-top:10px;font-size:13px;font-weight:600;color:var(--text)}
+.links a{border-bottom:1px solid var(--g500)}.links a:hover{color:var(--primary);border-color:var(--primary)}
+.btn2{font:600 13px var(--font);border:1px solid var(--g200);background:var(--bg);color:var(--text);border-radius:10px;padding:8px 14px;cursor:pointer;display:inline-flex;gap:8px;align-items:center}
+.btn2:hover{border-color:var(--primary);color:var(--primary)}
+kbd{font:500 11px var(--mono);border:1px solid var(--g200);border-radius:5px;padding:1px 6px;background:var(--g50);color:var(--g600)}
+.empty{font-style:italic;color:var(--g600)}
+.ph{color:var(--g600);font-style:italic}
+.theme-toggle{position:fixed;top:16px;right:16px;z-index:40;width:40px;height:40px;border-radius:50%;border:1px solid var(--g200);background:var(--bg);color:var(--text);display:grid;place-items:center;cursor:pointer;padding:0}
+.theme-toggle:hover{border-color:var(--primary);color:var(--primary)}

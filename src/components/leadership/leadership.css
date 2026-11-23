@@ -1,0 +1,5 @@
+.lead4{display:grid;grid-template-columns:repeat(auto-fit,minmax(210px,1fr));gap:14px}
+.lead4>div{border:1px solid var(--g200);border-radius:16px;padding:18px;display:flex;flex-direction:column;gap:6px}
+.lead4 svg{width:26px;height:26px;color:var(--primary)}
+.lead4 b{color:var(--text);font-size:15px}.lead4 span{font-size:13.5px}
+.note2{font-size:13px;color:var(--g500);border-left:2px solid var(--g200);padding-left:12px}

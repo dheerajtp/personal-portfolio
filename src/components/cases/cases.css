@@ -1,0 +1,16 @@
+.cs{border:1px solid var(--g200);border-radius:18px;overflow:hidden;background:var(--bg);display:flex;flex-direction:column}
+.cs .hd{display:grid;grid-template-columns:minmax(0,5fr) minmax(0,6fr)}
+.cs .vis{background:var(--g50);border-right:1px solid var(--g200);min-height:200px;overflow:hidden}
+.cs .vis img{width:100%;height:100%;object-fit:cover;object-position:top;display:block}
+.cs .tx{padding:22px;display:flex;flex-direction:column;gap:10px;min-width:0}
+.cs .tx h3{font:700 22px/1.2 var(--font);letter-spacing:-.02em}
+.cs .tx p{font-size:14.5px}
+.cs .tag{font:600 11px var(--font);letter-spacing:.1em;text-transform:uppercase;color:var(--secondary)}
+.cs .tog{background:none;border:0;padding:0;font:600 13px var(--font);color:var(--primary);cursor:pointer}
+.csb{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:20px 28px;padding:22px;border-top:1px solid var(--g200);background:var(--g50)}
+.csb>div{min-width:0;font-size:14px}.csb .w{grid-column:1/-1}
+.csb b{display:block;font:600 11px var(--font);letter-spacing:.1em;text-transform:uppercase;color:var(--g500);margin-bottom:6px}
+.csb ul{margin:0;padding-left:18px;display:flex;flex-direction:column;gap:6px}
+.csb strong{color:var(--text)}
+.cs-list{display:flex;flex-direction:column;gap:18px}
+@media (max-width:860px){.cs .hd,.csb{grid-template-columns:minmax(0,1fr)}.cs .vis{border-right:0;border-bottom:1px solid var(--g200);aspect-ratio:16/10}}
