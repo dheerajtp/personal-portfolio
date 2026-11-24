@@ -1,0 +1,10 @@
+.item{display:grid;grid-template-columns:minmax(90px,1fr) minmax(0,4fr);gap:16px;padding:16px;margin:-16px;border-radius:12px;transition:background .2s}
+.item:hover{background:var(--g50)}
+.item:hover h3{color:var(--primary)}
+.date{font:600 11px/1.9 var(--font);letter-spacing:.08em;text-transform:uppercase;color:var(--g600)}
+.item h3{font:600 16px/1.35 var(--font);transition:color .2s}
+.item .sub{color:var(--g600);font-size:14px}
+.item p{font-size:14px;margin-top:8px!important}
+.jh{display:flex;gap:14px;align-items:flex-start}
+.exp-sub{margin-top:12px}
+@media (max-width:860px){.item{grid-template-columns:minmax(0,1fr);gap:4px}}

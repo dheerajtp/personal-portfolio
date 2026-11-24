@@ -1,0 +1,427 @@
+<title>Dheeraj TP Portfolio</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap">
+<style>
+/* Layout: Brittany Chiang's split page (sticky identity column left, scrolling sections right), coloured with Josh Comeau's tokens, set in Inter. */
+:root{
+  /* Josh Comeau light tokens, read from joshwcomeau.com CSS */
+  --bg:hsl(0 0% 100%);--text:hsl(222 22% 5%);--primary:hsl(240 95% 62%);--secondary:hsl(333 100% 45%);
+  --g50:hsl(225 40% 96%);--g100:hsl(225 25% 92%);--g200:hsl(225 16% 86%);--g500:hsl(225 7% 60%);--g600:hsl(225 15% 50%);--g700:hsl(225 12% 40%);--g900:hsl(225 25% 20%);
+  --tint:hsl(240 95% 62% / .09);--code:hsl(213 80% 95%);
+  --font:Inter,ui-sans-serif,system-ui,-apple-system,"Segoe UI",Roboto,sans-serif;
+  --mono:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;
+  color-scheme:light}
+/* dark values are derived from Josh's 225deg gray scale, not copied from his dark theme */
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--bg:hsl(225 25% 8%);--text:hsl(225 40% 96%);--primary:hsl(240 100% 75%);--secondary:hsl(333 95% 65%);--g50:hsl(225 20% 12%);--g100:hsl(225 15% 16%);--g200:hsl(225 12% 22%);--g500:hsl(225 8% 55%);--g600:hsl(225 10% 65%);--g700:hsl(225 12% 75%);--g900:hsl(225 25% 88%);--tint:hsl(240 100% 75% / .12);--code:hsl(225 20% 14%);color-scheme:dark}}
+:root[data-theme="dark"]{--bg:hsl(225 25% 8%);--text:hsl(225 40% 96%);--primary:hsl(240 100% 75%);--secondary:hsl(333 95% 65%);--g50:hsl(225 20% 12%);--g100:hsl(225 15% 16%);--g200:hsl(225 12% 22%);--g500:hsl(225 8% 55%);--g600:hsl(225 10% 65%);--g700:hsl(225 12% 75%);--g900:hsl(225 25% 88%);--tint:hsl(240 100% 75% / .12);--code:hsl(225 20% 14%);color-scheme:dark}
+*{box-sizing:border-box}
+body{background:var(--bg);color:var(--g700);font:16px/1.6 var(--font);margin:0;padding-inline:max(16px,env(safe-area-inset-left,0px)) max(16px,env(safe-area-inset-right,0px))}
+a{color:inherit;text-decoration:none}
+:focus-visible{outline:2px solid var(--primary);outline-offset:3px;border-radius:4px}
+h1,h2,h3{color:var(--text);margin:0}
+.bar{max-width:1100px;margin:0 auto;padding-block:12px;display:flex;gap:12px;align-items:center;justify-content:space-between;flex-wrap:wrap;font-size:13px;color:var(--g600);border-bottom:1px solid var(--g200)}
+.bar button,.bar summary,.ghost{font:500 13px var(--font);color:var(--text);background:var(--g50);border:1px solid var(--g200);border-radius:8px;padding:6px 12px;cursor:pointer}
+.pick{max-width:1100px;margin:12px auto 0;border:1px solid var(--g200);border-radius:12px;background:var(--g50);padding:14px 16px;font-size:13px}
+.pick summary{cursor:pointer;font-weight:600;color:var(--text)}
+.ptools{display:flex;flex-wrap:wrap;gap:8px;margin:12px 0;align-items:center}
+.ptools input{font:14px var(--font);padding:6px 10px;border:1px solid var(--g200);border-radius:8px;background:var(--bg);color:var(--text);width:190px;min-width:0}
+.rl{display:grid;grid-template-columns:repeat(auto-fill,minmax(230px,1fr));gap:6px;max-height:240px;overflow:auto}
+.ri{display:flex;gap:8px;padding:7px 10px;border:1px solid var(--g200);border-radius:8px;cursor:pointer;background:var(--bg);min-width:0}
+.ri:has(input:checked){border-color:var(--primary);background:var(--tint)}
+.ri b{display:block;color:var(--text);overflow-wrap:anywhere}.ri small{color:var(--g600)}
+
+.site{max-width:1100px;margin:0 auto;display:grid;grid-template-columns:minmax(0,5fr) minmax(0,7fr);gap:48px;padding-block:56px 80px}
+.side{position:sticky;top:24px;align-self:start;display:flex;flex-direction:column;gap:20px;max-height:calc(100vh - 48px)}
+.side h1{font:700 clamp(34px,4.4vw,48px)/1.05 var(--font);letter-spacing:-.03em}
+.side h2{font:500 20px/1.3 var(--font)}
+.side p{margin:0;max-width:30ch}
+.nav{display:flex;flex-direction:column;gap:10px;margin-top:24px}
+.nav a{display:flex;align-items:center;gap:12px;font:600 12px var(--font);letter-spacing:.14em;text-transform:uppercase;color:var(--g600)}
+.nav a::before{content:"";width:32px;height:1px;background:var(--g500);transition:width .2s,background .2s}
+.nav a:hover,.nav a.on{color:var(--text)}.nav a:hover::before,.nav a.on::before{width:64px;background:var(--text)}
+.soc{display:flex;gap:16px;flex-wrap:wrap;font-size:14px;margin-top:auto}
+.soc a:hover,.cp:hover{color:var(--primary)}
+.cp{background:none;border:0;padding:0;font:inherit;color:inherit;cursor:pointer}
+.main{display:flex;flex-direction:column;gap:80px;min-width:0}
+.main section{scroll-margin-top:24px;display:flex;flex-direction:column;gap:18px}
+.eyebrow{font:700 12px var(--font);letter-spacing:.14em;text-transform:uppercase;color:var(--text)}
+.main p{margin:0}
+.main em{font-style:normal;color:var(--text);font-weight:500}
+.item{display:grid;grid-template-columns:minmax(90px,1fr) minmax(0,4fr);gap:16px;padding:16px;margin:-16px;border-radius:12px;transition:background .2s}
+.item:hover{background:var(--g50)}
+.item:hover h3{color:var(--primary)}
+.date{font:600 11px/1.9 var(--font);letter-spacing:.08em;text-transform:uppercase;color:var(--g600)}
+.item h3{font:600 16px/1.35 var(--font)}
+.item .sub{color:var(--g600);font-size:14px}
+.item p{font-size:14px;margin-top:8px!important}
+.chips{display:flex;flex-wrap:wrap;gap:6px;margin-top:12px}
+.chip{font:500 12px var(--font);color:var(--primary);background:var(--tint);border-radius:99px;padding:3px 12px}
+.pf{display:flex;flex-wrap:wrap;gap:8px}
+.pf button{font:500 12px var(--font);background:none;border:1px solid var(--g200);color:var(--g700);border-radius:99px;padding:4px 12px;cursor:pointer}
+.pf button[aria-pressed="true"]{background:var(--text);color:var(--bg);border-color:var(--text)}
+.links{display:flex;gap:14px;margin-top:10px;font-size:13px;font-weight:600;color:var(--text)}
+.links a{border-bottom:1px solid var(--g500)}.links a:hover{color:var(--primary);border-color:var(--primary)}
+.empty{font-style:italic;color:var(--g500)}
+.two{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:24px}
+.aw{display:flex;justify-content:space-between;gap:12px;padding:10px 0;border-bottom:1px solid var(--g200);font-size:14px}
+.aw b{color:var(--text);font-weight:600}
+.stat{display:flex;gap:28px;flex-wrap:wrap}
+.stat b{display:block;font:700 34px/1 var(--font);color:var(--secondary);letter-spacing:-.02em}
+.stat span{font-size:13px;color:var(--g600)}
+.step{display:grid;grid-template-columns:28px minmax(0,1fr);gap:12px;font-size:14px}
+.step i{font:700 12px/28px var(--font);font-style:normal;text-align:center;border-radius:50%;background:var(--tint);color:var(--primary);height:28px}
+.cta{display:inline-block;align-self:flex-start;font:600 14px var(--font);border:1px solid var(--primary);color:var(--primary);border-radius:10px;padding:10px 18px}
+.cta:hover{background:var(--tint)}
+footer{font-size:13px;color:var(--g500);padding-top:24px}
+#toast{position:fixed;left:50%;bottom:calc(20px + env(safe-area-inset-bottom,0px));transform:translateX(-50%);background:var(--text);color:var(--bg);padding:8px 16px;border-radius:99px;font-size:13px;opacity:0;pointer-events:none;transition:opacity .2s}
+#toast.show{opacity:1}
+/* v2 polish */
+body{background-image:radial-gradient(60% 40% at 0% 0%,var(--tint),transparent 70%),radial-gradient(40% 30% at 100% 20%,hsl(333 100% 45% / .06),transparent 70%);background-repeat:no-repeat}
+.av{width:88px;height:88px;border-radius:50%;padding:3px;background:linear-gradient(135deg,var(--primary),var(--secondary));flex:none}
+.av div{width:100%;height:100%;border-radius:50%;background:var(--bg);display:grid;place-items:center;font:700 26px var(--font);color:var(--text);letter-spacing:-.02em;text-align:center}
+.av small{display:block;font:500 9px var(--font);color:var(--g500);letter-spacing:.04em}
+.who{display:flex;gap:16px;align-items:center}
+.side h1 span{background:linear-gradient(90deg,var(--primary),var(--secondary));-webkit-background-clip:text;background-clip:text;color:transparent}
+.avail{display:inline-flex;align-items:center;gap:8px;font-size:13px;color:var(--g700);align-self:flex-start;border:1px solid var(--g200);border-radius:99px;padding:4px 12px;background:var(--bg)}
+.avail::before{content:"";width:8px;height:8px;border-radius:50%;background:#22c55e;box-shadow:0 0 0 4px rgb(34 197 94/.2)}
+.eyebrow{display:flex;align-items:center;gap:12px;font-size:13px}
+.eyebrow::after{content:"";flex:1;height:1px;background:var(--g200)}
+.eyebrow .n{font-weight:500;color:var(--g500);letter-spacing:.04em}
+/* project cards */
+.proj{border:1px solid var(--g200);border-radius:16px;overflow:hidden;background:var(--bg);transition:transform .25s,box-shadow .25s,border-color .25s;display:flex;flex-direction:column}
+.proj:hover{transform:translateY(-3px);border-color:var(--primary);box-shadow:0 14px 34px -14px hsl(240 95% 62% / .35)}
+.proj.feat{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr)}
+.shot{background:var(--g50);border-bottom:1px solid var(--g200);aspect-ratio:16/10;overflow:hidden}
+.proj.feat .shot{border-bottom:0;border-right:1px solid var(--g200);aspect-ratio:auto;min-height:220px}
+.shot svg{width:100%;height:100%;display:block;transition:transform .5s}
+.proj:hover .shot svg{transform:scale(1.04)}
+.pb{padding:18px;display:flex;flex-direction:column;gap:10px;min-width:0}
+.pb h3{font:700 19px/1.25 var(--font);letter-spacing:-.01em}
+.pb p{font-size:14px;margin:0!important}
+.meta{display:flex;gap:8px;flex-wrap:wrap;align-items:center;font-size:12px;color:var(--g600)}
+.meta .live{display:inline-flex;gap:6px;align-items:center;color:#16a34a;font-weight:600}
+.meta .live::before{content:"";width:7px;height:7px;border-radius:50%;background:#22c55e}
+.det{display:none;border-top:1px dashed var(--g200);padding-top:12px;font-size:13.5px;flex-direction:column;gap:8px}
+.proj.open .det{display:flex}
+.det b{display:block;font:600 11px var(--font);letter-spacing:.1em;text-transform:uppercase;color:var(--g500);margin-bottom:2px}
+.det .ph{color:var(--g500);font-style:italic}
+.tog{background:none;border:0;padding:0;font:600 13px var(--font);color:var(--primary);cursor:pointer;align-self:flex-start}
+.grid2{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:18px}
+.proj.feat{grid-column:1/-1}
+/* workflow */
+.flow{display:flex;flex-direction:column;position:relative;gap:0}
+.fs{display:grid;grid-template-columns:44px minmax(0,1fr);gap:16px;padding-bottom:22px;position:relative}
+.fs:not(:last-child)::before{content:"";position:absolute;left:21px;top:44px;bottom:0;width:2px;background:linear-gradient(var(--primary),var(--g200))}
+.fs i{width:44px;height:44px;border-radius:14px;display:grid;place-items:center;background:var(--tint);color:var(--primary);font-style:normal}
+.fs.rv i{background:linear-gradient(135deg,var(--primary),var(--secondary));color:#fff}
+.fs h3{font:600 16px var(--font)}
+.fs p{font-size:14px;margin-top:2px!important}
+.fs ul{margin:8px 0 0;padding:0;list-style:none;display:flex;flex-wrap:wrap;gap:6px}
+.fs li{font-size:12px;border:1px solid var(--g200);border-radius:99px;padding:2px 10px;color:var(--g700)}
+.fs.rv{padding:16px;margin:0 -16px 22px;border-radius:14px;background:var(--g50);border:1px solid var(--g200)}
+.fs.rv:not(:last-child)::before{left:37px;top:60px;bottom:-22px}
+/* recognition + education */
+.aws{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:14px}
+.aw2{border:1px solid var(--g200);border-radius:16px;padding:18px;display:flex;flex-direction:column;gap:10px;position:relative;overflow:hidden;background:var(--bg);transition:transform .25s,border-color .25s}
+.aw2:hover{transform:translateY(-3px);border-color:var(--secondary)}
+.aw2::after{content:"";position:absolute;right:-30px;top:-30px;width:90px;height:90px;border-radius:50%;background:hsl(333 100% 45% / .08)}
+.aw2 svg{width:34px;height:34px;color:var(--secondary)}
+.aw2 b{color:var(--text);font:700 16px/1.3 var(--font)}
+.aw2 span{font-size:12px;font-weight:600;letter-spacing:.08em;text-transform:uppercase;color:var(--g600)}
+.edu{display:flex;flex-direction:column;gap:0;position:relative}
+.ed{display:grid;grid-template-columns:100px 18px minmax(0,1fr);gap:14px;padding-bottom:22px}
+.ed .y{font:700 14px var(--font);color:var(--text);text-align:right;font-variant-numeric:tabular-nums}
+.ed .y small{display:block;font-weight:500;font-size:12px;color:var(--g500)}
+.ed .dot{position:relative}
+.ed .dot::before{content:"";position:absolute;left:5px;top:6px;width:8px;height:8px;border-radius:50%;background:var(--primary);box-shadow:0 0 0 4px var(--tint)}
+.ed:not(:last-child) .dot::after{content:"";position:absolute;left:8px;top:20px;bottom:-22px;width:2px;background:var(--g200)}
+.ed h3{font:600 16px var(--font)}.ed p{font-size:14px;margin-top:2px!important;color:var(--g600)}
+.sk{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:14px}
+.sk div{border:1px solid var(--g200);border-radius:14px;padding:14px 16px}
+.sk b{display:block;font:600 12px var(--font);letter-spacing:.1em;text-transform:uppercase;color:var(--g500);margin-bottom:8px}
+/* v4: company logos */
+.lg{width:44px;height:44px;object-fit:contain;border:1px solid var(--g200);border-radius:12px;background:#fff;padding:5px;flex:none}
+.co{display:flex;gap:12px;flex-wrap:wrap;align-items:center}
+.co div{display:flex;align-items:center;gap:10px;border:1px solid var(--g200);border-radius:14px;padding:8px 14px 8px 8px;font-size:13px;color:var(--g700);background:var(--bg)}
+.co b{display:block;color:var(--text);font-weight:600}
+.jh{display:flex;gap:14px;align-items:flex-start}
+/* v3: case studies, leadership, palette, activity */
+.shot img{transition:transform .5s}.proj:hover .shot img{transform:scale(1.04)}
+.cs{border:1px solid var(--g200);border-radius:18px;overflow:hidden;background:var(--bg);display:flex;flex-direction:column}
+.cs .hd{display:grid;grid-template-columns:minmax(0,5fr) minmax(0,6fr)}
+.cs .vis{background:var(--g50);border-right:1px solid var(--g200);min-height:200px;overflow:hidden}
+.cs .vis img,.cs .vis svg{width:100%;height:100%;object-fit:cover;object-position:top;display:block}
+.cs .tx{padding:22px;display:flex;flex-direction:column;gap:10px;min-width:0}
+.cs .tx h3{font:700 22px/1.2 var(--font);letter-spacing:-.02em}
+.cs .tx p{font-size:14.5px}
+.tag{font:600 11px var(--font);letter-spacing:.1em;text-transform:uppercase;color:var(--secondary)}
+.csb{display:none;grid-template-columns:repeat(2,minmax(0,1fr));gap:20px 28px;padding:22px;border-top:1px solid var(--g200);background:var(--g50)}
+.cs.open .csb{display:grid}
+.csb>div{min-width:0;font-size:14px}.csb .w{grid-column:1/-1}
+.csb b{display:block;font:600 11px var(--font);letter-spacing:.1em;text-transform:uppercase;color:var(--g500);margin-bottom:6px}
+.csb ul{margin:0;padding-left:18px;display:flex;flex-direction:column;gap:6px}
+.csb .ph{color:var(--g500);font-style:italic}
+.lead4{display:grid;grid-template-columns:repeat(auto-fit,minmax(210px,1fr));gap:14px}
+.lead4>div{border:1px solid var(--g200);border-radius:16px;padding:18px;display:flex;flex-direction:column;gap:6px}
+.lead4 svg{width:26px;height:26px;color:var(--primary)}
+.lead4 b{color:var(--text);font-size:15px}.lead4 span{font-size:13.5px}
+.note2{font-size:13px;color:var(--g500);border-left:2px solid var(--g200);padding-left:12px}
+.now{display:flex;flex-wrap:wrap;gap:8px}
+.now span{font-size:13px;border:1px solid var(--g200);border-radius:99px;padding:5px 12px;background:var(--bg);color:var(--g700)}
+.now span::before{content:"";display:inline-block;width:6px;height:6px;border-radius:50%;background:var(--primary);margin-right:8px;vertical-align:1px}
+.act{border:1px solid var(--g200);border-radius:14px;padding:6px 16px;font-size:13.5px}
+.act div{display:flex;justify-content:space-between;gap:12px;padding:9px 0;border-bottom:1px solid var(--g200)}
+.act div:last-child{border:0}.act b{color:var(--text);font-weight:600}.act span{color:var(--g500);font-variant-numeric:tabular-nums}
+.btn2{font:600 13px var(--font);border:1px solid var(--g200);background:var(--bg);color:var(--text);border-radius:10px;padding:8px 14px;cursor:pointer;display:inline-flex;gap:8px;align-items:center}
+.btn2:hover{border-color:var(--primary);color:var(--primary)}
+kbd{font:500 11px var(--mono);border:1px solid var(--g200);border-radius:5px;padding:1px 6px;background:var(--g50);color:var(--g600)}
+#pal{position:fixed;inset:0;background:hsl(225 25% 8% / .55);display:none;align-items:flex-start;justify-content:center;padding-top:14vh;z-index:50}
+#pal.show{display:flex}
+#pal .box{width:min(520px,calc(100vw - 32px));background:var(--bg);border:1px solid var(--g200);border-radius:16px;box-shadow:0 30px 80px -20px #000;overflow:hidden}
+#pal input{width:100%;border:0;border-bottom:1px solid var(--g200);padding:16px 18px;font:16px var(--font);background:var(--bg);color:var(--text);outline:none}
+#pal ul{list-style:none;margin:0;padding:6px;max-height:300px;overflow:auto}
+#pal li{padding:10px 12px;border-radius:10px;cursor:pointer;display:flex;justify-content:space-between;font-size:14px;color:var(--text)}
+#pal li.on,#pal li:hover{background:var(--tint)}#pal li small{color:var(--g500)}
+.share{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:20px}
+.card{border:1px solid var(--g200);border-radius:12px;overflow:hidden;background:var(--bg);font-size:13px}
+.card .im{aspect-ratio:1.91/1;background:linear-gradient(135deg,hsl(240 95% 62%),hsl(333 100% 45%));display:grid;place-items:center;color:#fff;font:700 28px var(--font);letter-spacing:-.02em;text-align:center;padding:10px}
+.card .im small{display:block;font:500 13px var(--font);opacity:.85;margin-top:4px}
+.card div:last-child{padding:10px 14px}.card b{display:block;color:var(--text)}
+@media (max-width:860px){.cs .hd,.csb,.share{grid-template-columns:minmax(0,1fr)}.cs .vis{border-right:0;border-bottom:1px solid var(--g200);aspect-ratio:16/10}}
+@media (max-width:860px){.proj.feat,.grid2{grid-template-columns:minmax(0,1fr)}.proj.feat .shot{border-right:0;border-bottom:1px solid var(--g200);aspect-ratio:16/10}.ed{grid-template-columns:70px 18px minmax(0,1fr)}}
+@media (max-width:860px){.site{grid-template-columns:minmax(0,1fr);gap:40px;padding-block:32px 56px}.side{position:static;max-height:none}.nav{display:none}.item{grid-template-columns:minmax(0,1fr);gap:4px}}
+@media (prefers-reduced-motion:reduce){*{transition:none!important}}
+</style>
+
+<div class="bar">
+  <span>Portfolio preview</span>
+  <span><button id="theme" type="button" aria-label="Toggle light and dark theme">Toggle theme</button></span>
+</div>
+
+<details class="pick" open>
+  <summary>Choose repositories shown in Projects <span id="count" style="font-weight:400;color:var(--g600)"></span></summary>
+  <div class="ptools"><input id="q" type="search" placeholder="Filter by name or language" aria-label="Filter repositories"><button class="ghost" id="all" type="button">Select all shown</button><button class="ghost" id="none" type="button">Clear</button><button class="ghost" id="reset" type="button">Reset to suggested</button></div>
+  <div class="rl" id="rl"></div>
+  <p style="margin:10px 0 0;color:var(--g600)">Forks excluded. About 15 repos from 2021 and earlier could not be read. Most repos have no GitHub description, so the real site takes a one-line summary per repo from a config file.</p>
+</details>
+
+<div class="site">
+  <aside class="side">
+    <div><div class="who" style="margin-bottom:20px"><div class="av"><div>DT<small>photo soon</small></div></div><span class="avail">Open to opportunities</span></div><h1>Dheeraj <span>T.P</span></h1><h2 style="margin-top:12px">Full-Stack Developer and Team Lead</h2><p style="margin-top:12px">I build reliable web products with React, Node and Laravel, and lead the team that ships them.</p>
+      <nav class="nav" aria-label="Sections"><a href="#about">About</a><a href="#experience">Experience</a><a href="#cases">Case studies</a><a href="#projects">Projects</a><a href="#lead">Leadership</a><a href="#workflow">AI workflow</a><a href="#recognition">Recognition</a><a href="#contact">Contact</a></nav>
+      <div style="display:flex;gap:8px;flex-wrap:wrap;margin-top:24px"><button class="btn2" id="cv" type="button">Download resume</button><button class="btn2" id="kb" type="button">Search <kbd>Ctrl K</kbd></button></div></div>
+    <div class="soc"><a href="https://github.com/dheerajtp">GitHub</a><a href="https://linkedin.com/in/dheerajtp">LinkedIn</a><button class="cp" id="mail" type="button">dheerajtp6338@gmail.com</button><span id="clk" style="color:var(--g500)"></span></div>
+  </aside>
+
+  <main class="main">
+    <section id="about"><div class="eyebrow">About</div>
+      <p>I'm a full-stack developer and technical team lead in Calicut with <em>5+ years</em> of experience designing, building and delivering scalable web applications. I work across <em>React.js, Node.js, Express.js, Laravel, PHP and Python</em>, with hands-on REST API development, databases, third-party integrations and cloud deployments.</p>
+      <p>Today I lead four developers, turn client requirements from analysts and project managers into clear technical tasks, and keep delivery on track across SaaS platforms, e-commerce and complex business applications.</p>
+      <p>Outside work I build small tools for things I care about: a personal-finance tracker, a Formula One dashboard and an ambient-sound mixer.</p>
+      <div class="co"><div><img class="lg" data-logo="ioss" alt="Infinite Open Source Solutions logo" style="width:36px;height:36px"><span><b>Infinite Open Source Solutions</b>Team Lead · 2022 – now</span></div><div><img class="lg" data-logo="xl" alt="XL Technologies logo" style="width:36px;height:36px"><span><b>XL Technologies</b>Junior Web Developer · 2021 – 22</span></div></div>
+      <div class="now"><span>Leading four developers at Infinite Open Source Solutions</span><span>Building this portfolio and a Formula One dashboard</span><span>Open to Team Lead and Full-Stack roles</span></div>
+      <div class="stat"><div><b>5+</b><span>years shipping</span></div><div><b>4</b><span>developers led</span></div><div><b>3</b><span>awards</span></div></div>
+    </section>
+
+    <section id="experience"><div class="eyebrow">Experience</div>
+      <a class="item"><div class="date">Jun 2022 – Present</div><div><div class="jh"><img class="lg" data-logo="ioss" alt="Infinite Open Source Solutions logo"><div><h3>Team Lead · Full-Stack Developer · Infinite Open Source Solutions</h3><div class="sub">Calicut</div></div></div><p>Lead a team of four developers across Python, Laravel, React.js and Node.js. Translate client requirements into technical tasks, set development priorities, resolve delivery blockers and keep communication clear across projects.</p><div class="chips"><span class="chip">React</span><span class="chip">Node.js</span><span class="chip">Laravel</span><span class="chip">Python</span><span class="chip">Team leadership</span></div></div></a>
+      <a class="item"><div class="date">Apr 2021 – May 2022</div><div><div class="jh"><img class="lg" data-logo="xl" alt="XL Technologies logo"><div><h3>Junior Web Developer · XL Technologies</h3><div class="sub">Calicut</div></div></div><p>Built MERN-stack web applications and REST APIs with Express.js and Node.js for web and mobile platforms.</p><div class="chips"><span class="chip">MongoDB</span><span class="chip">Express</span><span class="chip">React</span><span class="chip">Node.js</span></div></div></a>
+      <div class="eyebrow" style="margin-top:12px">Company projects</div>
+      <a class="item"><div class="date">E-commerce</div><div><h3>Direct Marketing Software</h3><p>E-commerce platform for international clients: product management, orders, cart and checkout, customised per client. Admin back office in Laravel, user back office in React with a Node API, and a Python commission module. Pay-in and payout integrated through third-party gateways.</p><div class="chips"><span class="chip">Laravel</span><span class="chip">React</span><span class="chip">Node.js</span><span class="chip">Python</span><span class="chip">Payments</span></div></div></a>
+      <a class="item"><div class="date">Travel</div><div><h3>Flight Booking Software</h3><p>A flight booking product built by the company. Node.js, Express.js and MongoDB backend integrating the Duffel API for search and booking, with payment gateway integration and REST APIs connecting the app to Duffel.</p><div class="chips"><span class="chip">Node.js</span><span class="chip">Express</span><span class="chip">MongoDB</span><span class="chip">Duffel API</span><span class="chip">Payments</span></div></div></a>
+      <a class="item"><div class="date">SaaS</div><div><h3>Desklog</h3><p>Contributed to a web-based employee productivity and time-tracking application in React.js.</p><div class="chips"><span class="chip">React</span></div></div></a>
+    </section>
+
+    <section id="cases"><div class="eyebrow">Case studies</div>
+      <p>Five projects in more depth: two I shipped at work, and three I built myself.</p>
+      <div id="cs" style="display:flex;flex-direction:column;gap:18px"></div>
+    </section>
+
+    <section id="projects"><div class="eyebrow">Projects <span id="pc" style="color:var(--g500);font-weight:500"></span></div>
+      <div class="act" aria-label="Recently pushed repositories"><div><b>Recent GitHub activity</b><span>last push</span></div><div><b>personal-portfolio</b><span>23 Nov 2026</span></div><div><b>formula-one</b><span>22 Nov 2026</span></div><div><b>money-flow</b><span>12 Nov 2026</span></div><div><b>Claude-Session</b><span>9 Nov 2026</span></div></div>
+      <div class="pf" id="pf" role="group" aria-label="Filter projects by language"></div>
+      <div id="pl" class="grid2"></div>
+    </section>
+
+    <section id="lead"><div class="eyebrow">How I lead</div>
+      <p>I lead four developers across Python, Laravel, React.js and Node.js. The job is to keep the work clear, ordered and moving.</p>
+      <div class="lead4">
+        <div><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M9 11l3 3L22 4"/><path d="M21 12v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11"/></svg><b>Clear tasks</b><span>I turn client requirements from analysts and project managers into technical tasks the team can pick up.</span></div>
+        <div><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M3 6h18M3 12h12M3 18h6"/></svg><b>Priorities</b><span>I set development priorities so the most important milestone is always the one in progress.</span></div>
+        <div><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3v12m0 0-4-4m4 4 4-4M5 21h14"/></svg><b>Unblocking</b><span>I resolve delivery challenges early, before they turn into missed dates.</span></div>
+        <div><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg><b>Communication</b><span>I keep communication clear across projects, so everyone knows what is happening and why.</span></div>
+      </div>
+      <p class="note2">Client projects are confidential, so this section describes how I work rather than naming clients or quoting project counts.</p>
+    </section>
+
+    <section id="workflow"><div class="eyebrow">AI-assisted workflow</div>
+      <p>Claude Code and agent skills are part of how I plan, build and review. Every change moves through the same six steps, and nothing ships without review. I even built a tool to watch my agents work: <em>Agent Office</em>, in the case studies above.</p>
+      <div class="flow">
+        <div class="fs"><i><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 3H6a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V9z"/><path d="M14 3v6h6M8 13h8M8 17h5"/></svg></i><div><h3>Understand</h3><p>Turn the requirement into a written spec with acceptance checks.</p><ul><li>Spec</li><li>Acceptance criteria</li></ul></div></div>
+        <div class="fs"><i><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="7"/><path d="m21 21-4.3-4.3"/></svg></i><div><h3>Investigate</h3><p>Read the real repository first and reuse what already exists.</p><ul><li>Repo survey</li><li>Reuse over rewrite</li></ul></div></div>
+        <div class="fs"><i><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg></i><div><h3>Approve</h3><p>Agree the scope before any file changes. The plan is the contract.</p><ul><li>Approval gate</li></ul></div></div>
+        <div class="fs"><i><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m16 18 6-6-6-6M8 6l-6 6 6 6"/></svg></i><div><h3>Build</h3><p>Implement only the approved scope, in small slices that can run in parallel.</p><ul><li>Claude Code</li><li>Agent skills</li><li>Small slices</li></ul></div></div>
+        <div class="fs rv"><i><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/><path d="m9 12 2 2 4-4"/></svg></i><div><h3>Code review</h3><p>AI reviews the diff for bugs, security issues and standards before I do. Then I read every change myself, and nothing merges until both passes are clean.</p><ul><li>AI diff review</li><li>Security check</li><li>Standards check</li><li>Human review</li></ul></div></div>
+        <div class="fs"><i><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><path d="M22 4 12 14.01l-3-3"/></svg></i><div><h3>Verify</h3><p>Run tests, lint and a real browser check, then ship.</p><ul><li>Tests</li><li>Lint</li><li>Browser check</li></ul></div></div>
+      </div>
+    </section>
+
+    <section id="recognition"><div class="eyebrow">Recognition</div>
+      <div class="aws">
+        <div class="aw2"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M6 9H4a2 2 0 0 1-2-2V5h4M18 9h2a2 2 0 0 0 2-2V5h-4M6 3h12v7a6 6 0 0 1-12 0zM12 16v3M8 21h8"/></svg><b>Best React + Node Developer</b><span>Jul – Dec 2023</span></div>
+        <div class="aw2"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="m12 2 3.1 6.3 6.9 1-5 4.9 1.2 6.8L12 17.8 5.8 21l1.2-6.8-5-4.9 6.9-1z"/></svg><b>Task Master of the Quarter</b><span>Q1 2023</span></div>
+        <div class="aw2"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="9" r="6"/><path d="m8.5 14 -1.5 8 5-3 5 3-1.5-8"/></svg><b>Best Node Developer</b><span>Jul – Dec 2022</span></div>
+      </div>
+      <div class="eyebrow" style="margin-top:28px">Education</div>
+      <div class="edu">
+        <div class="ed"><div class="y">2017 – 2020<small>3 years</small></div><div class="dot"></div><div><h3>Master of Computer Application</h3><p>Centre for Computer Science and Information Technology, Calicut University</p></div></div>
+        <div class="ed"><div class="y">2014 – 2017<small>3 years</small></div><div class="dot"></div><div><h3>BSc Computer Science</h3><p>Mahatma Gandhi University</p></div></div>
+      </div>
+      <div class="eyebrow" style="margin-top:28px">Skills</div>
+      <div class="sk">
+        <div><b>Frontend</b><div style="border:0;padding:0" class="chips"><span class="chip">React</span><span class="chip">React Native</span><span class="chip">JavaScript</span><span class="chip">HTML</span><span class="chip">CSS</span></div></div>
+        <div><b>Backend</b><div style="border:0;padding:0" class="chips"><span class="chip">Node.js</span><span class="chip">Express</span><span class="chip">Laravel</span><span class="chip">PHP</span><span class="chip">Python</span></div></div>
+        <div><b>Data and ops</b><div style="border:0;padding:0" class="chips"><span class="chip">MongoDB</span><span class="chip">MySQL</span><span class="chip">Docker</span><span class="chip">REST APIs</span></div></div>
+        <div><b>AI-assisted</b><div style="border:0;padding:0" class="chips"><span class="chip">Claude Code</span><span class="chip">Agent skills</span><span class="chip">Prompt engineering</span></div></div>
+      </div>
+    </section>
+
+    <section id="contact"><div class="eyebrow">Contact</div>
+      <p>Open to new roles and projects. The quickest way to reach me is email.</p>
+      <button class="cta" id="mail2" type="button">Copy dheerajtp6338@gmail.com</button>
+      <p style="font-size:14px">9656633878 · <a href="https://github.com/dheerajtp" style="border-bottom:1px solid var(--g500)">github.com/dheerajtp</a> · <a href="https://linkedin.com/in/dheerajtp" style="border-bottom:1px solid var(--g500)">linkedin.com/in/dheerajtp</a></p>
+      <footer>© 2026 Dheeraj T.P · Calicut, Kerala</footer>
+    </section>
+  </main>
+</div>
+<div id="toast" role="status"></div>
+
+<section class="site" style="display:block;padding-block:0 56px"><details class="pick" style="margin:0"><summary>Search and sharing preview</summary>
+  <div class="share" style="margin-top:14px"><div class="card"><div class="im">Dheeraj T.P<small>Full-Stack Developer and Team Lead</small></div><div><b>Dheeraj T.P · Full-Stack Developer and Team Lead</b>Social card shown when the link is shared on LinkedIn or WhatsApp. In the build this is a 1200×630 image.</div></div>
+  <div style="font-size:13px;display:flex;flex-direction:column;gap:6px"><b style="color:var(--text)">Page title</b>Dheeraj T.P · Full-Stack Developer and Team Lead, Calicut<b style="color:var(--text);margin-top:6px">Description</b>React, Node and Laravel developer with 5+ years of experience, leading a team of four. Case studies, projects and contact.<b style="color:var(--text);margin-top:6px">Also included</b>Open Graph and Twitter tags, a sitemap, mobile-first layout, image lazy-loading and reduced-motion support.</div></div></details></section>
+
+<div id="pal" role="dialog" aria-modal="true" aria-label="Search"><div class="box"><input id="pi" placeholder="Jump to a section or run an action" aria-label="Search commands"><ul id="pu"></ul></div></div>
+<script>/*SHOTS*/</script>
+<script>
+var R=[
+["Claude-Session","JavaScript",2026,"Agent Office: an isometric office where real Claude Code sessions appear as avatars, with permission prompts answered from the page and a Finished shelf of completed work. Zero dependencies.","",1,"Node.js (zero dependencies), vanilla JavaScript"],
+["History-Shorts-Planner","JavaScript",0,"A planner for short history videos: calendar with a topic bank, board, series, costs and automatic generation, with posting status for YouTube and Instagram.","",1,"Plain JavaScript front end, local API",1],
+["formula-one","TypeScript",2026,"Formula One dashboard: championship standings, next-race countdown, circuits, records and calendar. Built solo with AI prompting.","formula-one-self.vercel.app",1,"React, TypeScript"],
+["money-flow","JavaScript",2026,"Personal money tracker for accounts, cards and loans, with a clear view of progress to financial freedom.","money-flow-jade.vercel.app",1,"React, Supabase"],
+["Piik-Alternative","JavaScript",2026,"Piik-lite: a self-hosted screen-share and chat app. The host shares their screen, friends join through one invite link, and video travels peer-to-peer over WebRTC.","",1,"JavaScript, Express, WebSocket (ws), WebRTC"],
+["liftlog","React Native",0,"Mobile app for workout tracking, built with React Native.","",1,"React Native",1],
+["event-log","JavaScript",2026,"Live Server-Sent Events monitor: watch backend logs arrive in a terminal-style dashboard, with search and pause.","event-log-two.vercel.app",1],
+["Golden-Hour-Offroad","JavaScript",2026,"","",0],["Velo-Reel","JavaScript",2026,"","",0],
+["wander","JavaScript",2026,"","",0],["Secure-Shield","JavaScript",2026,"","",0],["Pedal-Track","JavaScript",2026,"","",0],
+["personal-portfolio","—",2026,"","",0],
+["dictionary","JavaScript",2024,"","",0],["Ambient-Music-Mobile","JavaScript",2024,"Explore the Ambient Music Mobile Application.","",0],
+["litlog","JavaScript",2024,"Reading companion: manage books, look up word meanings, track progress.","",0],
+["Word-Wise","JavaScript",2024,"Mobile app built with Expo and the dictionaryapi.com API.","",0],
+["resume-creator","JavaScript",2024,"Online resume builder: Expo React Native, Clerk, Firebase.","",0],
+["expense-tracker","JavaScript",2024,"Expense Tracker Application","",0],["weather-app","JavaScript",2024,"Weather Application","",0],
+["chat-app","JavaScript",2024,"","",0],["lime-application","JavaScript",2024,"","",0],
+["real-time-chat-react-native-expo","JavaScript",2024,"","",0],
+["ev-charging-station-finder","JavaScript",2024,"EV charging station finder with Expo React Native and Expo Router.","",0],
+["friends","JavaScript",2024,"React Native UI built with Expo, Expo Router, image picker.","",0],
+["portfolio","JavaScript",2024,"Previous portfolio: React, GitHub API for project listing, Tailwind CSS.","portfolio-nu-swart.vercel.app",0],
+["expo-tanstack-query","JavaScript",2023,"React Native Expo app with TanStack Query.","",0],
+["cal-pal","JavaScript",2023,"Calorie app","",0],
+["grammar-corrector-extension","JavaScript",2023,"Extension that corrects grammar using OpenAI and React.","",0],
+["Open-AI-Grammer-Correction","JavaScript",2023,"Fixes English grammar with OpenAI.","",0],
+["Espera-Web","JavaScript",2023,"Espera Web","",0],
+["TypeScript","TypeScript",2023,"Study notes for learning TypeScript.","",0],
+["Ambient-Music","JavaScript",2022,"Web alternative to soundify.net with 16 combinable ambient sounds.","ambient-music.vercel.app",1],
+["Watch-Later","JavaScript",2022,"Track movies to watch later. React and Firebase.","watch-later-two.vercel.app",0],
+["Coding-Contests","JavaScript",2022,"Track coding contests with Google Calendar integration.","coding-contests.vercel.app",0],
+["When-Is-The-Next-MCU-Film","JavaScript",2022,"Answers when the next MCU film is, via an API.","when-is-the-next-mcu-film.vercel.app",0]
+];
+var sel={},lang='All',KEY='pf3-sel';
+function reset(){sel={};R.forEach(function(r){if(r[5])sel[r[0]]=1})}
+try{var s=JSON.parse(localStorage.getItem(KEY));if(s)sel=s;else reset()}catch(e){reset()}
+function save(){try{localStorage.setItem(KEY,JSON.stringify(sel))}catch(e){}}
+function esc(s){return String(s).replace(/[&<>"]/g,function(c){return{'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]})}
+function picked(){return R.filter(function(r){return sel[r[0]]})}
+function drawPick(){var q=document.getElementById('q').value.toLowerCase();
+  document.getElementById('rl').innerHTML=R.filter(function(r){return !q||(r[0]+' '+r[1]).toLowerCase().indexOf(q)>-1}).map(function(r){
+    return '<label class="ri"><input type="checkbox" data-n="'+esc(r[0])+'"'+(sel[r[0]]?' checked':'')+'><span><b>'+esc(r[0])+'</b><small>'+esc(r[1])+(r[2]?' · '+r[2]:'')+(r[7]?' · no public repo':'')+'</small></span></label>'}).join('');
+  document.getElementById('count').textContent='('+picked().length+' of '+R.length+' selected)'}
+function drawSite(){var P=picked();
+  var langs=['All'].concat(P.map(function(r){return r[1]}).filter(function(v,i,a){return a.indexOf(v)===i}));
+  if(langs.indexOf(lang)<0)lang='All';
+  document.getElementById('pf').innerHTML=P.length?langs.map(function(l){return '<button type="button" data-l="'+esc(l)+'" aria-pressed="'+(l===lang)+'">'+esc(l)+'</button>'}).join(''):'';
+  var V=P.filter(function(r){return lang==='All'||r[1]===lang});
+  document.getElementById('pc').textContent='('+V.length+')';
+  document.getElementById('pl').innerHTML=V.length?V.map(function(r,i){
+    var ph=function(t){return '<span class="ph">'+t+'</span>'};
+    return '<article class="proj'+(i===0&&V.length>1?' feat':'')+'"><div class="shot">'+shot(r)+'</div><div class="pb"><div class="meta">'+(r[2]?'<span>'+r[2]+'</span><span>·</span>':'')+'<span>'+esc(r[1])+'</span>'+(r[4]?'<span class="live">Live</span>':'')+'</div><h3>'+esc(r[0])+'</h3><p>'+(r[3]?esc(r[3]):ph('One-line summary goes here.'))+'</p><div class="chips" style="margin-top:0"><span class="chip">'+esc(r[1])+'</span>'+(/Expo|React Native|mobile/i.test(r[3]+r[0])?'<span class="chip">Mobile</span>':'<span class="chip">Web</span>')+'</div>'+
+    '<div class="det"><div><b>Overview</b>'+(r[3]?esc(r[3]):ph('What it does and who it is for.'))+'</div><div><b>My role</b>'+ph('Solo build, design and deployment.')+'</div><div><b>Highlights</b>'+ph('Two or three results or technical decisions.')+'</div><div><b>Stack</b>'+(r[6]?esc(r[6]):esc(r[1])+ph(' · add framework, database, hosting'))+'</div></div>'+
+    '<div class="links" style="margin-top:4px">'+(r[4]?'<a href="#">Live site ↗</a>':'')+(r[7]?'':'<a href="#">GitHub ↗</a>')+'<button class="tog" type="button" data-t="1" aria-expanded="false">View details</button></div></div></article>'}).join(''):'<p class="empty">No repositories selected. Choose some in the picker above.</p>'}
+function shot(r){if(SHOTS[r[0]])return '<img src="'+SHOTS[r[0]]+'" alt="Screenshot of '+esc(r[0])+'" loading="lazy" style="width:100%;height:100%;object-fit:cover;object-position:top;display:block">';var h=0,n=r[0];for(var k=0;k<n.length;k++)h=(h*31+n.charCodeAt(k))%360;
+  var a=220+h%60,b=300+h%50,u=r[4]||(r[7]?n+' · mobile app':'github.com/dheerajtp/'+n);
+  return '<svg viewBox="0 0 320 200" preserveAspectRatio="xMidYMid slice" role="img" aria-label="Placeholder preview for '+esc(n)+'"><defs><linearGradient id="g'+h+'" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="hsl('+a+' 90% 62%)"/><stop offset="1" stop-color="hsl('+b+' 90% 58%)"/></linearGradient></defs><rect width="320" height="200" fill="url(#g'+h+')"/><rect x="28" y="22" width="264" height="168" rx="10" fill="#fff" opacity=".96"/><rect x="28" y="22" width="264" height="22" rx="10" fill="#e8eaf2"/><rect x="28" y="34" width="264" height="10" fill="#e8eaf2"/><circle cx="42" cy="33" r="3" fill="#ff6b6b"/><circle cx="52" cy="33" r="3" fill="#fbbf24"/><circle cx="62" cy="33" r="3" fill="#34d399"/><rect x="76" y="28" width="150" height="10" rx="5" fill="#fff"/><text x="82" y="36" font-size="6.5" fill="#667" font-family="sans-serif">'+esc(u.length>34?u.slice(0,33)+'…':u)+'</text><rect x="44" y="58" width="110" height="10" rx="5" fill="hsl('+a+' 70% 40%)"/><rect x="44" y="76" width="170" height="6" rx="3" fill="#d6d9e6"/><rect x="44" y="88" width="140" height="6" rx="3" fill="#d6d9e6"/><rect x="44" y="108" width="72" height="56" rx="6" fill="hsl('+a+' 85% 92%)"/><rect x="124" y="108" width="72" height="56" rx="6" fill="hsl('+b+' 85% 92%)"/><rect x="204" y="108" width="72" height="56" rx="6" fill="hsl('+a+' 85% 92%)"/></svg>'}
+function ph(t){return '<span class="ph">'+t+'</span>'}
+function dia(a,b,c){return '<svg viewBox="0 0 320 200" role="img" aria-label="Diagram"><rect width="320" height="200" fill="var(--g50)"/><g font-family="Inter,sans-serif" font-size="11" text-anchor="middle"><rect x="20" y="78" width="90" height="44" rx="10" fill="var(--primary)"/><text x="65" y="104" fill="#fff" font-weight="600">'+a+'</text><path d="M110 100h40M150 100l-8-5m8 5-8 5" stroke="var(--g500)" stroke-width="1.6" fill="none"/><rect x="150" y="30" width="150" height="34" rx="9" fill="var(--bg)" stroke="var(--g200)"/><text x="225" y="51" fill="var(--text)">'+b[0]+'</text><rect x="150" y="83" width="150" height="34" rx="9" fill="var(--bg)" stroke="var(--g200)"/><text x="225" y="104" fill="var(--text)">'+b[1]+'</text><rect x="150" y="136" width="150" height="34" rx="9" fill="var(--bg)" stroke="var(--secondary)"/><text x="225" y="157" fill="var(--secondary)" font-weight="600">'+c+'</text></g></svg>'}
+var CS=[
+{tag:'Client work',t:'Direct marketing e-commerce platform',s:'An e-commerce platform for international clients, delivered in three demos. I led the team across Laravel, React, Node and Python.',img:'fairobuy',
+ ctx:'An e-commerce application built for international clients. Each client needed the same core commerce flow with their own requirements, so we planned delivery around three demos.',
+ role:'Team lead. I turned requirements from business analysts and project managers into technical tasks, set priorities, and collaborated with development teams from other companies.',
+ ap:['Demo 1: registration, login and other customisations.','Demo 2: pay-in and payout, plus the connection to the commission system.','Demo 3: the client-specific customisations and changes, completing the whole requirement.','Covered product management, orders, cart and checkout throughout.'],
+ ch:[['Per-client customisation','We adapted the software to each client\'s feedback demo by demo, so the finished product matched their requirement.'],['Payments and integrations','Pay-in and payout were integrated by the second demo and connected to the commission system, alongside third-party APIs and gateways.'],['Leading the team','Coordinating developers across Laravel, React, Node and Python, and working with other companies\' development teams.']],
+ stack:'Laravel (admin back office), React with a Node API (user back office), Python (commission)',out:'Delivered an e-commerce application for international clients, who appreciated the work.'},
+{tag:'Company product · live',t:'Flight booking platform',s:'A flight booking product built by my company. I built the Node backend, the Duffel API integration and the payment flow.',img:'flight-booking',link:'https://flightbooking.wappss.com/',
+ ctx:'A flight booking product that searches and books flights through Duffel, with payments handled in the same flow.',
+ role:'Backend developer. I built the services and the APIs between the application and Duffel.',
+ ap:['Built backend services with Node.js, Express.js and MongoDB.','Integrated the Duffel API for flight search and booking, including one-way and return journeys.','Modelled connecting flights and their structure.','Applied passenger age rules and other booking restrictions.','Integrated the payment gateway.','Handled flight times by time zone, from morning to night departures.']
+ ,ch:[['Provider errors','Duffel errors are handled in a single, consistent way, so users get clear outcomes instead of raw provider messages.'],['Journey structure','One-way, return and connecting flights each have a different shape, and the backend had to build them reliably.'],['Rules and restrictions','Passenger age and other restrictions are enforced before payment.'],['Time zones','Search and booking logic works with times in each airport\'s local time zone.']],
+ stack:'Node.js and Express (backend), MongoDB (database), Duffel API (flight search and booking), payment gateway',out:'Shipped as a company product, live at flightbooking.wappss.com.'},
+{tag:'Personal project · built with Claude Code',t:'Agent Office, a live room for Claude Code sessions',s:'An isometric office where real Claude Code sessions appear as avatars. They walk in, sit at a desk, run tools and show plain-English progress.',img:'Claude-Session',
+ ctx:'A live room where your real Claude agents work. Every live session on the machine becomes a person at a desk, so you can see who is working, thinking, waiting for you or finished.',
+ role:'Personal project.',
+ ap:['Real sessions only: every state change on the floor comes from a live Claude session, nothing is simulated.','Answer Claude Code permission prompts from the page instead of the terminal.','A Finished shelf keeps what each session completed after it closes.','A Dormitory shows the subagents and skills available, and wakes one when a session calls it.','A Workbench lets you pick a project folder and branch and send an agent into it.'],
+ stack:'Node.js with zero dependencies, vanilla JavaScript, no build step. Binds to 127.0.0.1 only, so nothing leaves the machine.',out:'Runs locally with npm start. Requires Node 20+ and the Claude Code CLI.'},
+{tag:'Personal project · runs locally',t:'History Shorts Planner',s:'A planner for short history videos: schedule ideas on a calendar, track every video through to posting, and keep an eye on cost.',img:'History-Shorts-Planner',
+ ctx:'Publishing a short video regularly needs a plan. This planner holds the ideas, the schedule and the status of each video in one place.',
+ role:'Personal project.',
+ ap:['Calendar with a topic bank: drag a topic onto a date to schedule it.','Suggest ideas for the coming days, with a setting for how many videos a day.','Board, Series, News and Create views to move a video from idea to finished.','Time and cost tracked per video, with a Costs view.','Auto mode that generates videos automatically.','Posting status for YouTube and Instagram on every video.'],
+ stack:'Plain JavaScript front end with a local API, running on my machine.'},
+{tag:'Personal project · live',t:'Pit Wall, a Formula One dashboard',s:'A race-weekend dashboard: standings, the next race with a countdown, circuits, records and the calendar.',img:'formula-one',
+ ctx:'A single place to follow a Formula One season without hopping between sites.',
+ role:'Personal project. I built it solo, using AI prompting.',
+ ap:['Next-race card with the circuit outline, session times and a live countdown.','Driver and constructor standings with team-colour bars.','Season progress, last race podium, and a Calcutta/UTC time toggle.','Sections for Weekend, Calendar, Circuits, Records, Drivers and Teams, plus a season selector.'],
+ stack:'React, TypeScript, hosted on Vercel'}];
+function drawCS(){document.getElementById('cs').innerHTML=CS.map(function(c){
+ return '<article class="cs"><div class="hd"><div class="vis">'+(c.img?'<img src="'+SHOTS[c.img]+'" alt="Screenshot of '+esc(c.t)+'">':c.vis)+'</div><div class="tx"><span class="tag">'+c.tag+'</span><h3>'+c.t+'</h3><p>'+c.s+'</p><div class="links" style="margin-top:2px"><button class="tog" type="button" data-cs="1" aria-expanded="false">Read case study</button>'+(c.link?'<a href="'+c.link+'">Live product ↗</a>':'')+'</div></div></div>'+
+ '<div class="csb"><div class="w"><b>Context</b>'+c.ctx+'</div><div><b>My role</b>'+c.role+'</div><div><b>Stack</b>'+c.stack+'</div><div class="w"><b>What I did</b><ul>'+c.ap.map(function(x){return '<li>'+x+'</li>'}).join('')+'</ul></div>'+(c.ch?'<div class="w"><b>Challenges</b><ul>'+c.ch.map(function(x){return '<li><span style="color:var(--text);font-weight:600">'+x[0]+'.</span> '+x[1]+'</li>'}).join('')+'</ul></div>':'')+(c.out?'<div class="w"><b>Outcome</b>'+c.out+'</div>':'')+'</div></article>'}).join('')}
+document.getElementById('cs').onclick=function(e){var b=e.target.closest&&e.target.closest('[data-cs]');if(!b)return;var o=b.closest('.cs').classList.toggle('open');b.textContent=o?'Hide case study':'Read case study';b.setAttribute('aria-expanded',o)};
+function render(){drawPick();drawSite();drawCS();[].slice.call(document.querySelectorAll('[data-logo]')).forEach(function(i){i.src=LOGOS[i.getAttribute('data-logo')]})}
+/* command palette */
+var CMD=[['About','#about'],['Experience','#experience'],['Case studies','#cases'],['Projects','#projects'],['Leadership','#lead'],['AI workflow','#workflow'],['Recognition','#recognition'],['Contact','#contact'],['Copy email','copy'],['Toggle light/dark theme','theme'],['Download resume','cv']],pi=document.getElementById('pi'),pu=document.getElementById('pu'),pal=document.getElementById('pal'),pidx=0,pcur=[];
+function drawPal(){var q=pi.value.toLowerCase();pcur=CMD.filter(function(c){return c[0].toLowerCase().indexOf(q)>-1});if(pidx>=pcur.length)pidx=0;pu.innerHTML=pcur.map(function(c,i){return '<li data-i="'+i+'" class="'+(i===pidx?'on':'')+'">'+c[0]+'<small>'+(c[1][0]==='#'?'Go to':'Action')+'</small></li>'}).join('')||'<li>No match</li>'}
+function openPal(){pal.classList.add('show');pi.value='';pidx=0;drawPal();pi.focus()}
+function closePal(){pal.classList.remove('show')}
+function run(c){closePal();if(!c)return;if(c[1][0]==='#'){var t=document.querySelector(c[1]);if(t)t.scrollIntoView({behavior:matchMedia('(prefers-reduced-motion:reduce)').matches?'auto':'smooth'})}else if(c[1]==='copy')copy();else if(c[1]==='theme')document.getElementById('theme').click();else document.getElementById('cv').click()}
+pi.oninput=function(){pidx=0;drawPal()};
+pi.onkeydown=function(e){if(e.key==='ArrowDown'){pidx=Math.min(pidx+1,pcur.length-1);drawPal();e.preventDefault()}else if(e.key==='ArrowUp'){pidx=Math.max(pidx-1,0);drawPal();e.preventDefault()}else if(e.key==='Enter')run(pcur[pidx]);else if(e.key==='Escape')closePal()};
+pu.onclick=function(e){var l=e.target.closest('li[data-i]');if(l)run(pcur[+l.getAttribute('data-i')])};
+pal.onclick=function(e){if(e.target===pal)closePal()};
+document.addEventListener('keydown',function(e){if((e.ctrlKey||e.metaKey)&&e.key.toLowerCase()==='k'){e.preventDefault();openPal()}});
+document.getElementById('kb').onclick=openPal;
+document.getElementById('cv').onclick=function(){toast('In the build this downloads the resume PDF')};
+function toast(t){var e=document.getElementById('toast');e.textContent=t;e.className='show';setTimeout(function(){e.className=''},1600)}
+function copy(){var m='dheerajtp6338@gmail.com';try{navigator.clipboard.writeText(m).then(function(){toast('Email copied')},function(){toast(m)})}catch(e){toast(m)}}
+document.getElementById('mail').onclick=copy;document.getElementById('mail2').onclick=copy;
+document.getElementById('rl').onchange=function(e){var n=e.target.getAttribute('data-n');if(e.target.checked)sel[n]=1;else delete sel[n];save();render()};
+document.getElementById('q').oninput=drawPick;
+document.getElementById('all').onclick=function(){var q=document.getElementById('q').value.toLowerCase();R.forEach(function(r){if(!q||(r[0]+' '+r[1]).toLowerCase().indexOf(q)>-1)sel[r[0]]=1});save();render()};
+document.getElementById('none').onclick=function(){sel={};save();render()};
+document.getElementById('reset').onclick=function(){reset();save();render()};
+document.getElementById('pl').onclick=function(e){var b=e.target.closest&&e.target.closest('[data-t]');if(!b)return;var c=b.closest('.proj'),o=c.classList.toggle('open');b.textContent=o?'Hide details':'View details';b.setAttribute('aria-expanded',o)};
+document.getElementById('pf').onclick=function(e){var l=e.target.getAttribute('data-l');if(l){lang=l;drawSite()}};
+document.getElementById('theme').onclick=function(){var d=document.documentElement,dark=d.dataset.theme?d.dataset.theme==='dark':matchMedia('(prefers-color-scheme:dark)').matches;d.dataset.theme=dark?'light':'dark'};
+function tick(){document.getElementById('clk').textContent='Calicut · '+new Date().toLocaleTimeString('en-GB',{timeZone:'Asia/Kolkata',hour:'2-digit',minute:'2-digit'})+' IST'}
+tick();setInterval(tick,30000);
+var links=[].slice.call(document.querySelectorAll('.nav a'));
+if(window.IntersectionObserver){var io=new IntersectionObserver(function(es){es.forEach(function(e){if(e.isIntersecting)links.forEach(function(a){a.classList.toggle('on',a.getAttribute('href')==='#'+e.target.id)})})},{rootMargin:'-30% 0px -60% 0px'});
+  [].slice.call(document.querySelectorAll('.main section')).forEach(function(s){io.observe(s)})}
+render();
+</script>

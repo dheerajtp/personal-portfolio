@@ -1,0 +1,23 @@
+# Lighthouse (mobile, default throttling), 2026-11-24
+Target: temp copy of dist/ with __SITE_URL__ replaced by http://127.0.0.1:4190,
+served by `python3 -m http.server 4190`. The real files were not edited.
+Lighthouse from the npx cache, Chrome stable, --headless=new.
+
+Light (default colour scheme)
+  Performance     100
+  Accessibility   100
+  Best Practices  100
+  SEO             100
+
+Dark (--force-dark-mode, prefers-color-scheme: dark; final screenshot confirmed dark)
+  Performance     100
+  Accessibility   100
+  Best Practices  100
+  SEO             100
+
+No failing binary audits in either run. The earlier dark-theme color-contrast
+failure on `.pf button[aria-pressed="true"]` is fixed (text now var(--bg):
+6.19:1 light, 5.72:1 dark).
+
+Note: with __SITE_URL__ left unreplaced SEO scores lower by design until deploy
+(see DEPLOY.md).
